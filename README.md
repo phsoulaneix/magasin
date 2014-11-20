@@ -27,6 +27,7 @@ On décide maintenant d’implémenter une version “base de données” de nos
 * Ecrire de nouveaux DAOs qui effectue les lectures/ecritures dans une base de données relationnelle (à l'aide de JPA).
 * La configuration de la base est à faire dans le fichier src/main/java/spring.xml
 
+
 Tests d’intégration
 ----------------------
 Nous allons maintenant créer des tests d’intégration. Créer des tests d’intégration (suffixés IT au lieu de Test) qui effectuent directement les appels (tests boite noire), sans Mock. 
