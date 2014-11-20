@@ -1,4 +1,4 @@
-banque-junit
+Magasin-junit
 ============
 
 JUNIT
@@ -22,7 +22,10 @@ Aide : http://blog.soat.fr/2013/07/mockito-ou-comment-faciliter-lecriture-de-tes
 
 Base De Données
 -----------------
-On décide maintenant d’implémenter une version “base de données” de nos DAOs. Ecrire de nouveaux DAOs qui effectue les lectures/ecritures dans une base de données relationnelle (à l'aide de JPA).
+On décide maintenant d’implémenter une version “base de données” de nos DAOs. 
+* Ecrire les entity
+* Ecrire de nouveaux DAOs qui effectue les lectures/ecritures dans une base de données relationnelle (à l'aide de JPA).
+* La configuration de la base est à faire dans le fichier src/main/java/spring.xml
 
 Tests d’intégration
 ----------------------
