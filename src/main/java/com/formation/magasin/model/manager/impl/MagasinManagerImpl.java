@@ -2,6 +2,9 @@ package com.formation.magasin.model.manager.impl;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.formation.magasin.model.dao.ArticleDAO;
 import com.formation.magasin.model.dao.ClientDAO;
 import com.formation.magasin.model.dao.CommandeDAO;
@@ -14,19 +17,28 @@ import com.formation.magasin.model.manager.MagasinManager;
 /**
  * The Class BanqueManagerImpl.
  */
+@Service
 public class MagasinManagerImpl implements MagasinManager {
 
 	/** The client dao. */
-	private final ClientDAO clientDao;
+	@Autowired
+	private ClientDAO clientDao;
 
 	/** The compte dao. */
-	private final CommandeDAO commandeDao;
+	@Autowired
+	private CommandeDAO commandeDao;
 
 	/** The argent dao. */
-	private final ArticleDAO articleDao;
+	@Autowired
+	private ArticleDAO articleDao;
 
 	/** The ligne commande dao. */
-	private final LigneCommandeDAO ligneCommandeDao;
+	@Autowired
+	private LigneCommandeDAO ligneCommandeDao;
+
+	public MagasinManagerImpl() {
+		super();
+	}
 
 	/**
 	 * Instantiates a new magasin manager impl.
@@ -46,6 +58,38 @@ public class MagasinManagerImpl implements MagasinManager {
 		this.clientDao = clientDao;
 		this.commandeDao = commandeDao;
 		this.articleDao = articleDao;
+		this.ligneCommandeDao = ligneCommandeDao;
+	}
+
+	public ClientDAO getClientDao() {
+		return clientDao;
+	}
+
+	public void setClientDao(ClientDAO clientDao) {
+		this.clientDao = clientDao;
+	}
+
+	public CommandeDAO getCommandeDao() {
+		return commandeDao;
+	}
+
+	public void setCommandeDao(CommandeDAO commandeDao) {
+		this.commandeDao = commandeDao;
+	}
+
+	public ArticleDAO getArticleDao() {
+		return articleDao;
+	}
+
+	public void setArticleDao(ArticleDAO articleDao) {
+		this.articleDao = articleDao;
+	}
+
+	public LigneCommandeDAO getLigneCommandeDao() {
+		return ligneCommandeDao;
+	}
+
+	public void setLigneCommandeDao(LigneCommandeDAO ligneCommandeDao) {
 		this.ligneCommandeDao = ligneCommandeDao;
 	}
 
@@ -147,4 +191,5 @@ public class MagasinManagerImpl implements MagasinManager {
 
 		return Boolean.TRUE;
 	}
+
 }

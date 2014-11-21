@@ -1,8 +1,11 @@
 package com.formation.magasin.model.dao.impl.jpa;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
 
 import com.formation.magasin.model.dao.CommandeDAO;
 import com.formation.magasin.model.entity.Commande;
@@ -10,9 +13,12 @@ import com.formation.magasin.model.entity.Commande;
 /**
  * The Class CommandeDAOImplJPA.
  */
+@Repository
 public class CommandeDAOImplJPA implements CommandeDAO {
 
-	private final Map<Integer, Commande> listCommandes = new HashMap<Integer, Commande>();
+	/** The entity manager. */
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public boolean create(Commande obj) throws SQLException {

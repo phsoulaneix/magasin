@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.formation.magasin.model.dao.ArticleDAO;
 import com.formation.magasin.model.dao.ClientDAO;
@@ -26,7 +28,6 @@ import com.formation.magasin.model.entity.memory.ClientMemory;
 import com.formation.magasin.model.entity.memory.CommandeMemory;
 import com.formation.magasin.model.entity.memory.LigneCommandeMemory;
 import com.formation.magasin.model.manager.MagasinManager;
-import com.formation.magasin.model.manager.impl.MagasinManagerImpl;
 
 /**
  * The Class MagasinManagerImplTest.
@@ -60,8 +61,15 @@ public class MagasinManagerImplTest {
 		// articleDao = Mockito.mock(ArticleDAO.class);
 		// ligneCommandeDao = Mockito.mock(LigneCommandeDAO.class);
 
-		magasinManager = new MagasinManagerImpl(clientDao, commandeDao,
-				articleDao, ligneCommandeDao);
+		final ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"spring.xml");
+
+		magasinManager = (MagasinManager) ctx.getBean("magasinManagerImpl");
+		magasinManager.setArticleDao(articleDao);
+		magasinManager.setClientDao(clientDao);
+		magasinManager.setCommandeDao(commandeDao);
+		magasinManager.setLigneCommandeDao(ligneCommandeDao);
+
 	}
 
 	/**
@@ -99,13 +107,13 @@ public class MagasinManagerImplTest {
 		Mockito.when(clientDao.create(Mockito.any(Client.class))).thenReturn(
 				Boolean.TRUE);
 		Mockito.when(commandeDao.create(Mockito.any(Commande.class)))
-				.thenReturn(Boolean.TRUE);
+		.thenReturn(Boolean.TRUE);
 		Mockito.when(articleDao.create(Mockito.any(Article.class))).thenReturn(
 				Boolean.TRUE);
 		Mockito.when(articleDao.find(1)).thenReturn(article1);
 		Mockito.when(articleDao.find(2)).thenReturn(article2);
 		Mockito.when(ligneCommandeDao.create(Mockito.any(LigneCommande.class)))
-				.thenReturn(Boolean.TRUE);
+		.thenReturn(Boolean.TRUE);
 		final Boolean b1 = magasinManager.addClient(client);
 		Assert.assertTrue(b1);
 

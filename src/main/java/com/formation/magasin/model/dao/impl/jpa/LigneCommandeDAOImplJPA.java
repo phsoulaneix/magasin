@@ -2,13 +2,23 @@ package com.formation.magasin.model.dao.impl.jpa;
 
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
 import com.formation.magasin.model.dao.LigneCommandeDAO;
 import com.formation.magasin.model.entity.LigneCommande;
 
 /**
  * The Class LigneCommandeDAOImplDAO.
  */
+@Repository
 public class LigneCommandeDAOImplJPA implements LigneCommandeDAO {
+
+	/** The entity manager. */
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public boolean create(LigneCommande obj) throws SQLException {

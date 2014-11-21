@@ -2,13 +2,23 @@ package com.formation.magasin.model.dao.impl.jpa;
 
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
 import com.formation.magasin.model.dao.ArticleDAO;
 import com.formation.magasin.model.entity.Article;
 
 /**
  * The Class ArticleDAOImplJPA.
  */
+@Repository
 public class ArticleDAOImplJPA implements ArticleDAO {
+
+	/** The entity manager. */
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public boolean create(Article obj) throws SQLException {

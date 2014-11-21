@@ -2,13 +2,23 @@ package com.formation.magasin.model.dao.impl.jpa;
 
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
 import com.formation.magasin.model.dao.ClientDAO;
 import com.formation.magasin.model.entity.Client;
 
 /**
  * The Class ClientDAOImplJPA.
  */
+@Repository
 public class ClientDAOImplJPA implements ClientDAO {
+
+	/** The entity manager. */
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public boolean create(Client obj) throws SQLException {
