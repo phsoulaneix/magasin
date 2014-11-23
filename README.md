@@ -10,7 +10,6 @@ Injection de bean
 -----------------------
 * Ajouter les anotations @Repository, @Service, @Autowired et @PersistenceContext
 * Ajouter dans le spring.xml la ligne suivante : <context:component-scan base-package="com.package" /> pour chaque package qui contient un Repository ou un service.
-* Modifier la servlet HelloServlet pour que magasinManager devient un attribut de classe. 
 
 Spring MVC
 ---------------
