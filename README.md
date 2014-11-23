@@ -13,8 +13,9 @@ Injection de bean
 
 Spring MVC
 ---------------
-* Modifier le site pour permettre l'ajout, la lecture, la modification et la suppression des différents éléments. Pour cela, vous allez devoir  crée des nouvelles servlets, jsp,... Prendre exemple sur HelloServlet.
+* Modifier le site pour permettre l'affichage des différents éléments. Pour cela, vous allez devoir  crée des nouvelles servlets, jsp,... Prendre exemple sur HelloServlet.
 Doc : http://www.tutorialspoint.com/spring/spring_mvc_hello_world_example.htm
+* Modifier le site pour permettre l'ajout, la modification et la suppression des différents éléments.
 
 
 Spring Sécurité (Pour les plus rapide)
