@@ -1,32 +1,67 @@
 package com.formation.magasin.model.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * The Class LigneCommande.
  */
-public abstract class LigneCommande {
+@Entity
+public class LigneCommande {
+
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	/** The article. */
+	@ManyToOne
+	private Article article;
+
+	/** The quantité. */
+	private Integer quantité;
 
 	/**
-	 * Gets the article.
-	 *
-	 * @return the article
+	 * Instantiates a new ligne commande.
 	 */
-	abstract public Article getArticle();
+	public LigneCommande() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new ligne commande memory.
+	 *
+	 * @param article
+	 *            the article
+	 * @param quantité
+	 *            the quantité
+	 */
+	public LigneCommande(Article article, Integer quantité) {
+		super();
+		this.article = article;
+		this.quantité = quantité;
+	}
 
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
-	abstract public Integer getId();
-
-	abstract public void setId(Integer id);
+	public Integer getId() {
+		return id;
+	}
 
 	/**
 	 * Gets the quantité.
 	 *
 	 * @return the quantité
 	 */
-	abstract public Integer getQuantité();
+	public Integer getQuantité() {
+		return quantité;
+	}
 
 	/**
 	 * Sets the quantité.
@@ -34,7 +69,18 @@ public abstract class LigneCommande {
 	 * @param quantité
 	 *            the new quantité
 	 */
-	abstract public void setQuantité(Integer quantité);
+	public void setQuantité(Integer quantité) {
+		this.quantité = quantité;
+	}
+
+	/**
+	 * Gets the article.
+	 *
+	 * @return the article
+	 */
+	public Article getArticle() {
+		return article;
+	}
 
 	/**
 	 * Sets the article.
@@ -42,7 +88,20 @@ public abstract class LigneCommande {
 	 * @param article
 	 *            the new article
 	 */
-	abstract public void setArticle(Article article);
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+
+	}
 
 	/**
 	 * Gets the prix total.

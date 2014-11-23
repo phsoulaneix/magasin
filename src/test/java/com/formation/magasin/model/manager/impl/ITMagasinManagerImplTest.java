@@ -8,17 +8,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.formation.magasin.model.dao.ArticleDAO;
-import com.formation.magasin.model.dao.ClientDAO;
-import com.formation.magasin.model.dao.CommandeDAO;
-import com.formation.magasin.model.dao.LigneCommandeDAO;
 import com.formation.magasin.model.entity.Article;
 import com.formation.magasin.model.entity.Client;
 import com.formation.magasin.model.entity.Commande;
@@ -29,27 +23,10 @@ import com.formation.magasin.model.manager.MagasinManager;
  * The Class MagasinManagerImplTest.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class MagasinManagerImplTest {
+public class ITMagasinManagerImplTest {
 
 	/** The magasin manager. */
 	private MagasinManager magasinManager;
-
-	/** The client dao. */
-	@InjectMocks
-	private final ClientDAO clientDao = Mockito.mock(ClientDAO.class);
-
-	/** The commande dao. */
-	@InjectMocks
-	private final CommandeDAO commandeDao = Mockito.mock(CommandeDAO.class);
-
-	/** The article dao. */
-	@InjectMocks
-	private final ArticleDAO articleDao = Mockito.mock(ArticleDAO.class);
-
-	/** The ligne commande dao. */
-	@InjectMocks
-	private final LigneCommandeDAO ligneCommandeDao = Mockito
-	.mock(LigneCommandeDAO.class);
 
 	/**
 	 * Sets the up.
@@ -105,16 +82,6 @@ public class MagasinManagerImplTest {
 		commande.addLigneCommande(ligne2);
 		client.addCommande(commande);
 
-		Mockito.when(clientDao.create(Mockito.any(Client.class))).thenReturn(
-				Boolean.TRUE);
-		Mockito.when(commandeDao.create(Mockito.any(Commande.class)))
-		.thenReturn(Boolean.TRUE);
-		Mockito.when(articleDao.create(Mockito.any(Article.class))).thenReturn(
-				Boolean.TRUE);
-		Mockito.when(articleDao.find(1)).thenReturn(article1);
-		Mockito.when(articleDao.find(2)).thenReturn(article2);
-		Mockito.when(ligneCommandeDao.create(Mockito.any(LigneCommande.class)))
-		.thenReturn(Boolean.TRUE);
 		final Boolean b1 = magasinManager.addClient(client);
 		Assert.assertTrue(b1);
 

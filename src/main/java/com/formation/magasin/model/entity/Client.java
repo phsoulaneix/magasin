@@ -1,25 +1,64 @@
 package com.formation.magasin.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * The Class Client.
  */
-public abstract class Client {
+@Entity
+public class Client {
+
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	/** The nom. */
+	private String nom;
+
+	/** The prenom. */
+	private String prenom;
+
+	/** The liste commande. */
+	@OneToMany
+	private List<Commande> listeCommande = new ArrayList<Commande>();
 
 	/**
-	 * Gets the commande.
-	 *
-	 * @return the commande
+	 * Instantiates a new client.
 	 */
-	abstract public List<Commande> getCommande();
+	public Client() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new client memory.
+	 *
+	 * @param nom
+	 *            the nom
+	 * @param prenom
+	 *            the prenom
+	 */
+	public Client(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
 
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
-	abstract public Integer getId();
+	public Integer getId() {
+		return id;
+	}
 
 	/**
 	 * Sets the id.
@@ -27,29 +66,64 @@ public abstract class Client {
 	 * @param id
 	 *            the new id
 	 */
-	abstract public void setId(Integer id);
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * Sets the prenom.
+	 *
+	 * @param prenom
+	 *            the new prenom
+	 */
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	/**
+	 * Gets the commande.
+	 *
+	 * @return the commande
+	 */
+	public List<Commande> getCommande() {
+		return listeCommande;
+	}
 
 	/**
 	 * Gets the nom.
 	 *
 	 * @return the nom
 	 */
-	abstract public String getNom();
-
-	/**
-	 * Sets the nom.
-	 *
-	 * @param nom
-	 *            the new nom
-	 */
-	abstract public void setNom(String nom);
+	public String getNom() {
+		return nom;
+	}
 
 	/**
 	 * Gets the premon.
 	 *
 	 * @return the premon
 	 */
-	abstract public String getPremon();
+	public String getPremon() {
+		return prenom;
+	}
+
+	/**
+	 * Gets the liste commande.
+	 *
+	 * @return the liste commande
+	 */
+	public List<Commande> getListeCommande() {
+		return listeCommande;
+	}
+
+	/**
+	 * Gets the prenom.
+	 *
+	 * @return the prenom
+	 */
+	public String getPrenom() {
+		return prenom;
+	}
 
 	/**
 	 * Sets the premon.
@@ -57,22 +131,29 @@ public abstract class Client {
 	 * @param prenom
 	 *            the new premon
 	 */
-	abstract public void setPremon(String prenom);
+	public void setPremon(String prenom) {
+		this.prenom = prenom;
+	}
 
 	/**
-	 * Gets the liste commande.
+	 * Sets the nom.
 	 *
-	 * @return the liste commande
+	 * @param nom
+	 *            the new nom
 	 */
-	abstract public List<Commande> getListeCommande();
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
 	/**
 	 * Sets the liste commande.
 	 *
-	 * @param listCommande
+	 * @param listeCommande
 	 *            the new liste commande
 	 */
-	abstract public void setListeCommande(List<Commande> listCommande);
+	public void setListeCommande(List<Commande> listeCommande) {
+		this.listeCommande = listeCommande;
+	}
 
 	/**
 	 * Adds the commande.
@@ -81,7 +162,7 @@ public abstract class Client {
 	 *            the commande
 	 */
 	public void addCommande(Commande commande) {
-		getListeCommande().add(commande);
+		listeCommande.add(commande);
 	}
 
 }

@@ -1,18 +1,60 @@
 package com.formation.magasin.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * The Class Commande.
  */
-public abstract class Commande {
+@Entity
+public class Commande {
+
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	/** Liste des lignes de la commande. */
+	@OneToMany
+	private List<LigneCommande> lignesCommande = new ArrayList<LigneCommande>();
+
+	/** Le client. */
+	@ManyToOne
+	private Client client;
+
+	/**
+	 * Instantiates a new commande memory.
+	 */
+	public Commande() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new commande memory.
+	 *
+	 * @param client
+	 *            the client
+	 */
+	public Commande(Client client) {
+		super();
+		this.client = client;
+	}
 
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
-	abstract public Integer getId();
+	public Integer getId() {
+		return id;
+	}
 
 	/**
 	 * Sets the id.
@@ -20,14 +62,18 @@ public abstract class Commande {
 	 * @param id
 	 *            the new id
 	 */
-	abstract public void setId(Integer id);
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the lignes commande.
 	 *
 	 * @return the lignes commande
 	 */
-	abstract public List<LigneCommande> getLignesCommande();
+	public List<LigneCommande> getLignesCommande() {
+		return lignesCommande;
+	}
 
 	/**
 	 * Sets the lignes commande.
@@ -35,14 +81,18 @@ public abstract class Commande {
 	 * @param lignesCommande
 	 *            the new lignes commande
 	 */
-	abstract public void setLignesCommande(List<LigneCommande> lignesCommande);
+	public void setLignesCommande(List<LigneCommande> lignesCommande) {
+		this.lignesCommande = lignesCommande;
+	}
 
 	/**
 	 * Gets the client.
 	 *
 	 * @return the client
 	 */
-	abstract public Client getClient();
+	public Client getClient() {
+		return client;
+	}
 
 	/**
 	 * Sets the client.
@@ -50,7 +100,9 @@ public abstract class Commande {
 	 * @param client
 	 *            the new client
 	 */
-	abstract public void setClient(Client client);
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	/**
 	 * Adds the ligne commande.

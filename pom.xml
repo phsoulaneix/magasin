@@ -6,43 +6,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>test Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.2.5.RELEASE</spring.version>
 		<hibernate.version>4.1.9.Final</hibernate.version>
+		<mysql.connector.version>5.1.6</mysql.connector.version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>eclipselink</id>
-			<url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo/</url>
-		</repository>
-	</repositories>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+		<!-- DB related dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -54,26 +26,71 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.2</version>
+			<version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.12.1.GA</version>
 		</dependency>
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- CGLIB is required to process @Configuration classes -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<!-- Servlet API and JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -82,17 +99,13 @@
 			<version>9.1-901.jdbc4</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
-		</dependency>
-		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<finalName>test</finalName>
 		<plugins>
@@ -106,6 +119,19 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <targetPath>WEB-INF</targetPath>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 

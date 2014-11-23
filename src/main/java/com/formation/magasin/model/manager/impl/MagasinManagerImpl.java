@@ -1,14 +1,15 @@
 package com.formation.magasin.model.manager.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.magasin.model.dao.ArticleDAO;
 import com.formation.magasin.model.dao.ClientDAO;
 import com.formation.magasin.model.dao.CommandeDAO;
 import com.formation.magasin.model.dao.LigneCommandeDAO;
+import com.formation.magasin.model.entity.Article;
 import com.formation.magasin.model.entity.Client;
 import com.formation.magasin.model.entity.Commande;
 import com.formation.magasin.model.entity.LigneCommande;
@@ -17,80 +18,25 @@ import com.formation.magasin.model.manager.MagasinManager;
 /**
  * The Class BanqueManagerImpl.
  */
-@Service
 public class MagasinManagerImpl implements MagasinManager {
 
 	/** The client dao. */
-	@Autowired
 	private ClientDAO clientDao;
 
 	/** The compte dao. */
-	@Autowired
 	private CommandeDAO commandeDao;
 
 	/** The argent dao. */
-	@Autowired
 	private ArticleDAO articleDao;
 
 	/** The ligne commande dao. */
-	@Autowired
 	private LigneCommandeDAO ligneCommandeDao;
-
-	public MagasinManagerImpl() {
-		super();
-	}
 
 	/**
 	 * Instantiates a new magasin manager impl.
-	 *
-	 * @param clientDao
-	 *            the client dao
-	 * @param commandeDao
-	 *            the commande dao
-	 * @param articleDao
-	 *            the article dao
-	 * @param ligneCommandeDao
-	 *            the ligne commande dao
 	 */
-	public MagasinManagerImpl(ClientDAO clientDao, CommandeDAO commandeDao,
-			ArticleDAO articleDao, LigneCommandeDAO ligneCommandeDao) {
+	public MagasinManagerImpl() {
 		super();
-		this.clientDao = clientDao;
-		this.commandeDao = commandeDao;
-		this.articleDao = articleDao;
-		this.ligneCommandeDao = ligneCommandeDao;
-	}
-
-	public ClientDAO getClientDao() {
-		return clientDao;
-	}
-
-	public void setClientDao(ClientDAO clientDao) {
-		this.clientDao = clientDao;
-	}
-
-	public CommandeDAO getCommandeDao() {
-		return commandeDao;
-	}
-
-	public void setCommandeDao(CommandeDAO commandeDao) {
-		this.commandeDao = commandeDao;
-	}
-
-	public ArticleDAO getArticleDao() {
-		return articleDao;
-	}
-
-	public void setArticleDao(ArticleDAO articleDao) {
-		this.articleDao = articleDao;
-	}
-
-	public LigneCommandeDAO getLigneCommandeDao() {
-		return ligneCommandeDao;
-	}
-
-	public void setLigneCommandeDao(LigneCommandeDAO ligneCommandeDao) {
-		this.ligneCommandeDao = ligneCommandeDao;
 	}
 
 	/*
@@ -101,6 +47,7 @@ public class MagasinManagerImpl implements MagasinManager {
 	 * .magasin.model.entity.Commande)
 	 */
 	@Override
+	@Transactional(readOnly = false)
 	public Boolean addCommande(Commande commande) {
 		if (commande.getClient() == null) {
 			return Boolean.FALSE;
@@ -133,6 +80,7 @@ public class MagasinManagerImpl implements MagasinManager {
 	 * formation.magasin.model.entity.Commande)
 	 */
 	@Override
+	@Transactional(readOnly = false)
 	public Boolean removeCommande(Commande commande) {
 		try {
 			for (final LigneCommande ligne : commande.getLignesCommande()) {
@@ -154,6 +102,7 @@ public class MagasinManagerImpl implements MagasinManager {
 	 * .magasin.model.entity.Client)
 	 */
 	@Override
+	@Transactional(readOnly = false)
 	public Boolean addClient(Client client) {
 		try {
 			// Verification
@@ -190,6 +139,36 @@ public class MagasinManagerImpl implements MagasinManager {
 		}
 
 		return Boolean.TRUE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.formation.magasin.model.manager.MagasinManager#addArticle(com.formation
+	 * .magasin.model.entity.Article)
+	 */
+	@Override
+	@Transactional(readOnly = false)
+	public Boolean addArticle(Article article) {
+		try {
+			articleDao.create(article);
+		} catch (final SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.formation.magasin.model.manager.MagasinManager#getClients()
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	public List<Client> getClients() {
+		return clientDao.findAll();
 	}
 
 }

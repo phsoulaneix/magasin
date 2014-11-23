@@ -1,15 +1,55 @@
 package com.formation.magasin.model.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * The Class Article.
  */
-public abstract class Article {
+@Entity
+public class Article {
+
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	/** The nom. */
+	private String nom;
+
+	/** The prix. */
+	private Integer prix;
+
+	/**
+	 * Instantiates a new article.
+	 */
+	public Article() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new article.
+	 *
+	 * @param nom
+	 *            the nom
+	 * @param prix
+	 *            the prix
+	 */
+	public Article(String nom, int prix) {
+		this.nom = nom;
+		this.prix = prix;
+	}
+
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
-	abstract public Integer getId();
+	public Integer getId() {
+		return id;
+	}
 
 	/**
 	 * Sets the id.
@@ -17,14 +57,18 @@ public abstract class Article {
 	 * @param id
 	 *            the new id
 	 */
-	abstract public void setId(Integer id);
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the nom.
 	 *
 	 * @return the nom
 	 */
-	abstract public String getNom();
+	public String getNom() {
+		return nom;
+	}
 
 	/**
 	 * Sets the nom.
@@ -32,14 +76,19 @@ public abstract class Article {
 	 * @param nom
 	 *            the new nom
 	 */
-	abstract public void setNom(String nom);
+	public void setNom(String nom) {
+		this.nom = nom;
+
+	}
 
 	/**
 	 * Gets the prix.
 	 *
 	 * @return the prix
 	 */
-	abstract public Integer getPrix();
+	public Integer getPrix() {
+		return prix;
+	}
 
 	/**
 	 * Sets the prix.
@@ -47,5 +96,8 @@ public abstract class Article {
 	 * @param prix
 	 *            the new prix
 	 */
-	abstract public void setPrix(Integer prix);
+	public void setPrix(Integer prix) {
+		this.prix = prix;
+
+	}
 }

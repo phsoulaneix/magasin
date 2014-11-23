@@ -1,9 +1,8 @@
 package com.formation.magasin.model.manager;
 
-import com.formation.magasin.model.dao.ArticleDAO;
-import com.formation.magasin.model.dao.ClientDAO;
-import com.formation.magasin.model.dao.CommandeDAO;
-import com.formation.magasin.model.dao.LigneCommandeDAO;
+import java.util.List;
+
+import com.formation.magasin.model.entity.Article;
 import com.formation.magasin.model.entity.Client;
 import com.formation.magasin.model.entity.Commande;
 
@@ -12,21 +11,21 @@ import com.formation.magasin.model.entity.Commande;
  */
 public interface MagasinManager {
 
-	public ClientDAO getClientDao();
+	/**
+	 * Adds the article.
+	 *
+	 * @param article
+	 *            the article
+	 * @return the boolean
+	 */
+	public Boolean addArticle(Article article);
 
-	public void setClientDao(ClientDAO clientDao);
-
-	public CommandeDAO getCommandeDao();
-
-	public void setCommandeDao(CommandeDAO commandeDao);
-
-	public ArticleDAO getArticleDao();
-
-	public void setArticleDao(ArticleDAO articleDao);
-
-	public LigneCommandeDAO getLigneCommandeDao();
-
-	public void setLigneCommandeDao(LigneCommandeDAO ligneCommandeDao);
+	/**
+	 * Gets the clients.
+	 *
+	 * @return the clients
+	 */
+	public List<Client> getClients();
 
 	/**
 	 * Adds the client.
