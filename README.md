@@ -9,7 +9,11 @@ Modifier spring.xml et spring_test.xml pour configurer votre base de donnée.
 Injection de bean
 -----------------------
 * Ajouter les anotations @Repository, @Service, @Autowired et @PersistenceContext
-* Ajouter dans le spring.xml la ligne suivante : <context:component-scan base-package="com.package" /> pour chaque package qui contient un Repository ou un service.
+* Ajouter dans le spring.xml la ligne suivante : 
+
+  `<context:component-scan base-package="com.package.*******" />`
+  
+pour chaque package qui contient un Repository ou un service.
 
 Spring MVC
 ---------------
